@@ -6,7 +6,7 @@
 ##############################################################
 
 #TODO: Fill up the contents below in order to reference your assignment 3 git contents
-AESD_ASSIGNMENTS_VERSION = 110fdab7bd840b6ad8c361ecf4f95ab0c3069096
+AESD_ASSIGNMENTS_VERSION = c10563af7d8365e85748452c1456f044f1573ed5
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
@@ -16,6 +16,8 @@ AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
 
 define AESD_ASSIGNMENTS_BUILD_CMDS
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app all
+        $(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/server all
+	
 endef
 
 # TODO add your writer, finder and finder-test utilities/scripts to the installation steps below
@@ -35,6 +37,10 @@ define AESD_ASSIGNMENTS_INSTALL_TARGET_CMDS
 	$(INSTALL) -m 0755 $(@D)/finder-app/libm-2.31.so $(TARGET_DIR)/lib64
 	$(INSTALL) -m 0755 $(@D)/finder-app/libresolv.so.2 $(TARGET_DIR)/lib64
 	$(INSTALL) -m 0755 $(@D)/finder-app/libresolv-2.31.so $(TARGET_DIR)/lib64
+
+        $(INSTALL) -m 0755 $(@D)/server/aesdsocket $(TARGET_DIR)/usr/bin
+        $(INSTALL) -m 0755 $(@D)/server/aesdsocket-start-stop $(TARGET_DIR)/etc/init.d/S99aesdsocket
+	
 
 endef
 
